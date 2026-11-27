@@ -1,1 +1,1 @@
-# SE Git Practice, hello
+# SE Git Practice
