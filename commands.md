@@ -156,3 +156,38 @@ git branch -a
 git branch -d feature
 git log --oneline --graph --all
 git status
+
+
+
+
+
+**NAGIOS**
+# Download image
+docker pull jasonrivers/nagios:latest
+
+# Run Nagios
+docker run --name nagiosdemo -p 8888:80 jasonrivers/nagios:latest
+
+# Run in background (alternative)
+docker run -d --name nagiosdemo -p 8888:80 jasonrivers/nagios:latest
+
+# Check running containers
+docker ps
+
+# View logs
+docker logs nagiosdemo
+
+# Stop container
+docker stop nagiosdemo
+
+# Start stopped container
+docker start nagiosdemo
+
+# Remove container
+docker rm nagiosdemo
+
+# List images
+docker images
+
+# Remove image
+docker rmi jasonrivers/nagios:latest
