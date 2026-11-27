@@ -307,3 +307,53 @@ services:
       POSTGRES_USER: demo
       POSTGRES_PASSWORD: demo
       POSTGRES_DB: demo_db
+
+
+
+
+
+
+//aws
+# Update system
+sudo apt update
+
+# Install Docker
+sudo apt install docker.io -y
+
+# Start Docker
+sudo systemctl start docker
+sudo systemctl enable docker
+
+# Check Docker
+sudo docker --version
+
+# Create project folder
+mkdir aws-web
+cd aws-web
+
+# Create HTML webpage
+cat > index.html <<'EOF'
+<html>
+<head>
+    <title>My Webpage</title>
+</head>
+<body>
+    <h1>Hello from AWS!</h1>
+</body>
+</html>
+EOF
+
+# Create Dockerfile
+cat > Dockerfile <<'EOF'
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+EOF
+
+# Build Docker image
+sudo docker build -t myweb .
+
+# Run container
+sudo docker run -d --name myweb-container -p 80:80 myweb
+
+# Check running container
+sudo docker ps
