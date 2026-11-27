@@ -1,4 +1,5 @@
 
+
 # =====================================
 # 1. CLONE AND ENTER REPOSITORY
 # =====================================
@@ -191,3 +192,118 @@ docker images
 
 # Remove image
 docker rmi jasonrivers/nagios:latest
+
+
+
+
+
+
+
+
+
+#docker file
+
+# STEP 1: Create project folder
+mkdir Docker-Calculator
+cd Docker-Calculator
+
+# STEP 2: Create calculator.js manually in VS Code
+# Paste the JavaScript code provided below and save it.
+
+# STEP 3: Create Dockerfile manually in VS Code
+# Paste the Dockerfile content provided below and save it.
+
+# STEP 4: Build Docker image
+docker build -t calculator .
+
+# STEP 5: Verify image
+docker images
+
+# STEP 6: Run calculator container
+docker run --rm calculator 10 + 5
+docker run --rm calculator 10 - 5
+docker run --rm calculator 10 '*' 5
+docker run --rm calculator 10 / 2
+
+# STEP 7: Login to Docker Hub
+docker login
+
+# STEP 8: Tag image for Docker Hub
+docker tag calculator YOUR_USERNAME/calculator-app:latest
+
+# STEP 9: Push image to Docker Hub
+docker push YOUR_USERNAME/calculator-app:latest
+
+# STEP 10: Verify image
+# Open https://hub.docker.com/repositories
+# Open calculator-app and check the Tags section.
+
+
+
+
+FROM node:20-alpine
+WORKDIR /app
+COPY calculator.js .
+CMD ["node", "calculator.js"]
+
+
+
+
+
+
+//minikube
+minikube start --driver=docker
+
+kubectl create deployment mynginx --image=nginx
+
+kubectl get deployments
+kubectl get pods
+
+kubectl expose deployment mynginx --type=NodePort --port=80 --target-port=80
+
+kubectl scale deployment mynginx --replicas=4
+
+kubectl get pods
+kubectl get services
+
+minikube service mynginx
+
+
+
+
+
+
+
+//docker-multi
+mkdir compose-lab
+cd compose-lab
+code .
+
+# Create and save docker-compose.yml first
+
+docker compose up -d
+docker compose ps
+
+# Open http://localhost:8080
+
+docker compose logs
+docker compose down
+docker compose up -d
+docker compose ps
+
+
+
+
+.yaml file:
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+      POSTGRES_DB: demo_db
